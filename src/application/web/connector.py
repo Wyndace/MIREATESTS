@@ -1,5 +1,6 @@
 from time import sleep
 from httpx import Client, HTTPError, Response
+from icecream import ic
 
 
 class Connector():
@@ -23,6 +24,7 @@ class Connector():
         attempts -- кол-во попыток
         wait_sec -- кол-во секунд между попытками
         """
+        ic(url)
         try:
             if current_attempt < attempts:
                 response = client.request(

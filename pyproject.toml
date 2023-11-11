@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mireatests"
+version = "0.1.0"
+description = ""
+authors = ["Васильев Александр <wyndace.av@ya.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+icecream = "^2.1.3"
+selectolax = "^0.3.17"
+httpx = "^0.25.1"
+sqlalchemy = "^2.0.23"
+pytelegrambotapi = "^4.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

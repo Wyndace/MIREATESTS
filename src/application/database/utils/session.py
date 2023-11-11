@@ -1,9 +1,13 @@
+from logging import getLogger
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError, DataError
 from sqlalchemy.orm import Session, sessionmaker
 
 from ....config import settings
 from ..models.base import BaseModel
+from ..models.unit import Unit
+
+log = getLogger()
 
 
 class DBSession(object):
@@ -17,7 +21,7 @@ class DBSession(object):
 
     def __init__(self):
         engine = create_engine(settings.DATABASE_ENGINE)
-        BaseModel.metadata.create_all(engine)  # type: ignore
+        BaseModel.metadata.create_all(engine)
         self._session = sessionmaker(bind=engine)()
 
     def query(self, *entities, **kwargs):
@@ -31,23 +35,23 @@ class DBSession(object):
 
     def delete_model(self, model: BaseModel):
         if model is None:
-            print(f'{__name__}: model is None')
+            log.warning(f'{__name__}: model is None')
 
         try:
             self._session.delete(model)
         except IntegrityError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
         except DataError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
 
     def commit_session(self, need_close: bool = False):
         try:
             self._session.commit()
         except IntegrityError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
             raise
         except DataError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
             raise
 
         if need_close:
@@ -57,8 +61,8 @@ class DBSession(object):
         try:
             self._session.close()
         except IntegrityError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
             raise
         except DataError as e:
-            print(f'`{__name__}` {e}')
+            log.error(f'`{__name__}` {e}')
             raise

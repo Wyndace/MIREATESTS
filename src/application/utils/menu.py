@@ -1,18 +1,18 @@
-def chooser_menu(inp_text, items):
+def chooser_menu(inp_text: str, count_items: int) -> int:
     choice = -1
-    while 0 > choice > items:
+    while 0 > choice > count_items:
         try:
             choice = int(input(inp_text))
         except KeyboardInterrupt:
             print("\n\nВыходим из данного блока...\n")
-            return items+1
+            return count_items+1
         except ValueError:
             print('\nВведёно неверное значение! Попробуйте ещё раз!\n')
             continue
-        if int(choice) == items+1:
+        if int(choice) == count_items+1:
             print("\nВыходим из данного блока...\n")
-            return items+1
-        if 0 > choice > items:
+            return count_items+1
+        if 0 > choice > count_items:
             print('\nВведено неверное значение! Попробуйте ещё раз!\n')
     return choice
 

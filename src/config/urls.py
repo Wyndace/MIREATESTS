@@ -2,10 +2,10 @@
 Список используемых доменных имён
 """
 
-BASE = "example.com"
-ASSETS = "assets" + "." + BASE
-API = "api" + "." + BASE
+BASE = "mirea.ru"
+ONLINE_EDU = "online-edu" + "." + BASE
 
 HTTPS_BASE = "https://" + BASE
-HTTPS_ASSETS = "https://" + ASSETS
-HTTPS_API = "https://" + API
+HTTPS_ONLINE_EDU = "https://" + ONLINE_EDU
+
+CALENDAR = HTTPS_ONLINE_EDU + '/calendar/view.php?view=month'
